@@ -11,6 +11,7 @@
         this.rightPlanks = new Array();
         this.topPlanks = new Array();
         this.bottomPlanks = new Array();
+        this.stretcherWidth = 10;
     };
 
     cs.Cabinet.prototype.constructFacePlanks = function (face) {
@@ -24,42 +25,66 @@
         }
     };
 
+    cs.Cabinet.prototype.constructBottomFace = function () {
+        var face = window.cabinetstudio.constants.Faces.BOTTOM;
+        var plankConfig = this.plankConfig[face];
+        var leftJointConfig = this.jointConfig[window.cabinetstudio.constants.Corners.BOTTOM_LEFT];
+        var rightJointConfig = this.jointConfig[window.cabinetstudio.constants.Corners.RIGHT_BOTTOM];
+        var leftOffset=0,rightOffset=0;
+        if(leftJointConfig.primaryFace != face && (leftJointConfig.type==window.cabinetstudio.constants.Joints.BUTT
+            || leftJointConfig.type==window.cabinetstudio.constants.Joints.GROOVE)){
+            leftOffset = this.plankConfig[window.cabinetstudio.constants.LEFT].thickness;
+        }
+        if(rightJointConfig.primaryFace != face && (rightJointConfig.type==window.cabinetstudio.constants.Joints.BUTT
+            || rightJointConfig.type==window.cabinetstudio.constants.Joints.GROOVE)){
+            rightOffset = this.plankConfig[window.cabinetstudio.constants.RIGHT].thickness;
+        }
+        var length = this.width-leftOffset-rightOffset;
+        var width = this.depth;
+        var thickness= this.plankConfig[window.cabinetstudio.constants.BOTTOM].thickness;
+        return new cs.Plank(length,width,thickness);
+    }
+
 }) (window.cabinetstudio = window.cabinetstudio || {});
 
 var plankConfig = {
     'left': {
-        isStretchered:false
+        isStretchered:false,
+        thickness:10
     },
     'right': {
-        isStretchered:false
+        isStretchered:false,
+        thickness:10
     },
     'top': {
         isStretchered:true,
-        noOfStretchers:2
+        noOfStretchers:2,
+        thickness:10
     },
     'bottom': {
-        isStretchered:false
+        isStretchered:false,
+        thickness:10
     }
 };
 
 var jointConfig = {
     'leftTop': {
-        'type':'butt',
-        'primaryFace':'top'
+        'type':window.cabinetstudio.constants.Joints.BUTT,
+        'primaryFace':window.cabinetstudio.constants.Faces.TOP
     },
     'topRight': {
-        'type':'butt',
-        'primaryFace':'top'
+        'type':window.cabinetstudio.constants.Joints.BUTT,
+        'primaryFace':window.cabinetstudio.constants.Faces.TOP
     },
     'rightBottom': {
-        'type':'butt',
-        'primaryFace':'bottom'
+        'type':window.cabinetstudio.constants.Joints.BUTT,
+        'primaryFace':window.cabinetstudio.constants.Faces.BOTTOM
     },
     'bottomLeft': {
-        'type':'butt',
-        'primaryFace':'bottom'
+        'type':window.cabinetstudio.constants.Joints.BUTT,
+        'primaryFace': window.cabinetstudio.constants.Faces.BOTTOM
     },
     'back': {
-        'type':'groove'
+        'type':window.cabinetstudio.constants.Joints.GROOVE
     }
 }
