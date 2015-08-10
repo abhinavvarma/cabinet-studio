@@ -51,5 +51,30 @@ function MatrixUtils() {
 		}
 		return matrix;
 	}
+	
+	function getIdentityMatrix(size) {
+		
+		var rows = size;
+		var cols = size;
+		
+		var matrix = new Array(rows);
+		for (var i = 0; i < matrix.length; i++) {
+			matrix[i] = new Array(cols);
+		}
+
+		for (var i = 0; i < rows; i++) {
+			for (var j = 0; j < cols; j++) {
+				
+				if(i == j) {
+					matrix[i][j] = 1;
+				}else{
+					matrix[i][j] = 0;	
+				}
+					
+				
+			}
+		}
+		return matrix;
+	}
 
 }

@@ -49,18 +49,73 @@ function Plank(width, depth, thickNess) {
 	}
 };
 
-Plank.prototype.translate= function() {
+Plank.prototype.translate= function(xShift, yShift,zShift) {
+	
+	var translationMatrix = MatrixUtils.getIdentityMatrix(4);
+	translationMatrix[0][3] = xShift;
+	translationMatrix[1][3] = yShift;
+	translationMatrix[2][3] = zShift;
+
+	this.vertices = MatrixUtils.multiplyMatrices(translationMatrix, this.vertices);
+	
 }
 
-Plank.prototype.rotateAroundXAxis= function(angle) {
+Plank.prototype.rotateAroundXAxis= function(angleTheta) {
+	
+	// angle with the xy plane
+	if (angleTheta != 0) {
+		var cosTheta = Math.cos(Utils.toRadians(angleTheta));
+		var sinTheta = Math.sin(Utils.toRadians(angleTheta));
+		rotationMatrix = Matrix.getIdentityMatrix(4);
+		rotationMatrix[1][1] = cosTheta;
+		rotationMatrix[1][2] = -sinTheta;
+		rotationMatrix[2][1] = sinTheta;
+		rotationMatrix[2][2] = cosTheta;
+
+		// t.y = y * cosTheta - z * sinTheta;
+		// t.z = y * sinTheta + z * cosTheta;
+		this.vertices = Matrix.multiplyMatrices(rotationMatrix, this.vertices);
+	}
+	
 }
 
-Plank.prototype.rotateAroundYAxis= function(angle) {
+Plank.prototype.rotateAroundYAxis= function(angleTheta) {
+	
+	// angle with yz plane
+	if (angleTheta != 0) {
+		rotationMatrix = Matrix.getIdentityMatrix(4);
+		var cosTheta = Math.cos(Utils.toRadians(angleTheta));
+		var sinTheta = Math.sin(Utils.toRadians(angleTheta));
+
+		rotationMatrix[0][0] = sinTheta;
+		rotationMatrix[0][2] = cosTheta;
+		rotationMatrix[2][0] = -sinTheta;
+		rotationMatrix[2][2] = cosTheta;
+
+		this.vertices = Matrix.multiplyMatrices(rotationMatrix, this.vertices);
+	}
 }
 
-Plank.prototype.rotateAroundZAxis= function(angle) {
+Plank.prototype.rotateAroundZAxis= function(angleTheta) {
+	
+	// angle with the xz plane
+	if (angleTheta != 0) {
+		var rotationMatrix = Matrix.getIdentityMatrix(4);
+		var cosTheta = Math.cos(Utils.toRadians(angleTheta));
+		var sinTheta = Math.sin(Utils.toRadians(angleTheta));
+
+		rotationMatrix[0][0] = cosTheta;
+		rotationMatrix[0][1] = -sinTheta;
+		rotationMatrix[1][0] = sinTheta;
+		rotationMatrix[1][1] = cosTheta;
+
+		this.vertices = Matrix.multiplyMatrices(rotationMatrix, this.vertices);
+	}
 }
 
-Plank.prototype.rotate= function(angle) {
+Plank.prototype.rotate= function(xAngle, yAngle, zAngle) {
+	this.rotateAroundXAxis(xAngle);
+	this.rotateAroundYAxis(yAngle);
+	this.rotateAroundZAxis(zAngle);
 }
 
