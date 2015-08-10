@@ -1,3 +1,4 @@
+window.cabinetstudio = window.cabinetstudio || {};
 (function (cs) {
     "use strict";
     cs.Entity = function () {
@@ -16,4 +17,4 @@
         throw new cs.exceptions.NotImplementedException("This is an abstract method and to be implemented by inheriting class");
     };
 
-})(window.cabinetstudio = window.cabinetstudio || {});
+}(window.cabinetstudio));

@@ -1,3 +1,6 @@
+window.cabinetstudio = window.cabinetstudio || {};
+window.cabinetstudio.constants = window.cabinetstudio.constants || {};
+
 (function (constants) {
     "use strict";
     constants.Joints = {
@@ -5,16 +8,16 @@
         GROOVE : 'groove'
     };
     constants.Faces = {
+        BOTTOM : 'bottom',
         LEFT : 'left',
-        RIGHT : 'right',
         TOP : 'top',
-        BOTTOM : 'bottom'
+        RIGHT : 'right'
     };
     constants.Corners = {
+        BOTTOM_LEFT : 'bottomLeft',
         LEFT_TOP : 'leftTop',
         TOP_RIGHT : 'topRight',
-        RIGHT_BOTTOM : 'rightBottom',
-        BOTTOM_LEFT : 'bottomLeft'
-    }
+        RIGHT_BOTTOM : 'rightBottom'
+    };
 
-})(window.cabinetstudio.constants = window.cabinetstudio.constants || {});
+}(window.cabinetstudio.constants));
