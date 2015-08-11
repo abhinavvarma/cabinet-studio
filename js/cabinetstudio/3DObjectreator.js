@@ -1,6 +1,6 @@
 (function(cs){
     "use strict";
-    cs.ToObject = function(input){
+    cs.To3DObject = function(input){
         var plankGeometry = new THREE.Geometry();
         for(var i=0;i<8;i++){
             plankGeometry.vertices.push(new THREE.Vector3(input[0][i],input[1][i],input[2][i]));
