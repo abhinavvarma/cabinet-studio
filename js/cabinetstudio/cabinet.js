@@ -17,6 +17,8 @@ window.cabinetstudio = window.cabinetstudio || {};
         this.bottomPlanks = null;
     };
 
+    cs.utils.oops.inherit(cs.Cabinet, cs.Entity);
+
     cs.Cabinet.facesIndexed = [
         window.cabinetstudio.constants.Faces.BOTTOM,
         window.cabinetstudio.constants.Faces.LEFT,
