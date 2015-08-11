@@ -4,5 +4,4 @@ window.cabinetstudio.EdgeBinding = function (thickness) {
     window.cabinetstudio.Finishing.call(this, thickness);
 };
 
-window.cabinetstudio.EdgeBinding.prototype = Object.create(window.cabinetstudio.Finishing.prototype);
-window.cabinetstudio.EdgeBinding.prototype.constructor = window.cabinetstudio.EdgeBinding;
+window.cabinetstudio.utils.oops.inherit(window.cabinetstudio.EdgeBinding, window.cabinetstudio.Finishing);

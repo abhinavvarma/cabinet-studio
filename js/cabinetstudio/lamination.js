@@ -5,5 +5,4 @@ window.cabinetstudio.Lamination = function (thickness) {
     window.cabinetstudio.Finishing.call(this, thickness);
 };
 
-window.cabinetstudio.Lamination.prototype = Object.create(window.cabinetstudio.Finishing.prototype);
-window.cabinetstudio.Lamination.prototype.constructor = window.cabinetstudio.Lamination;
+window.cabinetstudio.utils.oops.inherit(window.cabinetstudio.Lamination, window.cabinetstudio.Finishing);

@@ -1,8 +1,8 @@
 window.cabinetstudio = window.cabinetstudio || {};
-window.cabinetstudio.Plank = function (width, depth, thickness) {
+window.cabinetstudio.Plank = function (length, breadth, thickness) {
     "use strict";
-    this.depth = depth;
-    this.width = width;
+    this.breadth = breadth;
+    this.length = length;
     this.thickness = thickness;
     var vertices = new Array(3);
     var i;
@@ -15,40 +15,40 @@ window.cabinetstudio.Plank = function (width, depth, thickness) {
     vertices[1][0] = 0;
     vertices[2][0] = 0;
 
-    vertices[0][1] = width;
+    vertices[0][1] = length;
     vertices[1][1] = 0;
     vertices[2][1] = 0;
 
-    vertices[0][2] = width;
+    vertices[0][2] = length;
     vertices[1][2] = 0;
-    vertices[2][2] = depth;
+    vertices[2][2] = breadth;
 
     vertices[0][3] = 0;
     vertices[1][3] = 0;
-    vertices[2][3] = depth;
+    vertices[2][3] = breadth;
 
     vertices[0][4] = 0;
     vertices[1][4] = thickness;
     vertices[2][4] = 0;
 
-    vertices[0][5] = width;
+    vertices[0][5] = length;
     vertices[1][5] = thickness;
     vertices[2][5] = 0;
 
-    vertices[0][6] = width;
+    vertices[0][6] = length;
     vertices[1][6] = thickness;
-    vertices[2][6] = depth;
+    vertices[2][6] = breadth;
 
     vertices[0][7] = 0;
     vertices[1][7] = thickness;
-    vertices[2][7] = depth;
+    vertices[2][7] = breadth;
 
     this.vertices = vertices;
 
     this.faces = [];
 
     for (i = 0; i < 6; i += 1) {
-        this.faces.push(new window.cabinetstudio.Face(window.cabinetstudio.constants.FINISHINGS.LAMINATION));
+        this.faces.push(new window.cabinetstudio.Face(window.cabinetstudio.constants.Finishings.NO_FINISHING));
     }
 };
 
