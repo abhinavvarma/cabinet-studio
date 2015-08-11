@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Plank</title>
+    <script type="text/javascript" src="js/lib/three.min.js">
+
+    </script>
+    <script type="text/javascript" src="js/lib/OrbitControls.js">
+
+    </script>
+    <script type="text/javascript" src="js/cabinetstudio/utils/math.js">
+
+    </script>
+    <script type="text/javascript" src="js/cabinetstudio/utils/matrix.js">
+
+    </script>
+     <script type="text/javascript" src="js/cabinetstudio/utils/oops.js">
+
+    </script>
+     <script type="text/javascript" src="js/cabinetstudio/constants.js">
+
+    </script>
+     <script type="text/javascript" src="js/cabinetstudio/finishing.js">
+
+    </script>
+    <script type="text/javascript" src="js/cabinetstudio/lamination.js">
+
+    </script>
+    <script type="text/javascript" src="js/cabinetstudio/edgebinding.js">
+
+    </script>
+
+    <script type="text/javascript" src="js/cabinetstudio/face.js">
+
+    </script>
+    <script type="text/javascript" src="js/cabinetstudio/plank.js">
+
+    </script>
+    <script type="text/javascript">
+        var renderer, scene, camera, controls;
+
+        function initRendering() {
+
+            camera = new THREE.PerspectiveCamera(45, window.innerWidth
+                    / window.innerHeight, 1, 10000);
+            camera.position.z = 5000;
+
+            controls = new THREE.OrbitControls(camera);
+            controls.addEventListener('change', render);
+
+            scene = new THREE.Scene();
+
+            renderer = new THREE.WebGLRenderer({
+                alpha: true
+            });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+
+            var divElement = document.getElementById("container");
+            divElement.appendChild(renderer.domElement);
+
+            window.addEventListener('resize', onWindowResize, false);
+
+            addPlank();
+
+            render();
+
+        }
+
+        function onWindowResize() {
+
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            render();
+
+        }
+
+        function addObject() {
+            var geom = new THREE.Geometry();
+            var v1 = new THREE.Vector3(0, 0, 0);
+            var v2 = new THREE.Vector3(30, 0, 0);
+            var v3 = new THREE.Vector3(30, 30, 0);
+
+            console.log(geom.vertices)
+            geom.vertices.push(new THREE.Vertex(v1));
+            geom.vertices.push(new THREE.Vertex(v2));
+            geom.vertices.push(new THREE.Vertex(v3));
+
+            geom.faces.push(new THREE.Face3(0, 1, 2));
+            geom.computeFaceNormals();
+
+            var mesh = new THREE.Mesh(geom, new THREE.MeshNormalMaterial());
+            scene.add(mesh);
+        }
+
+        function addPlank() {
+
+            var plank = new window.cabinetstudio.Plank(100, 50, 10);
+            var vertices = plank.vertices;
+
+            var geometry = new THREE.Geometry();
+
+            for (var i = 0; i < 8; i++) {
+                geometry.vertices.push(new THREE.Vector3(vertices[0][i],
+                        vertices[1][i], vertices[2][i]))
+            }
+
+            //bottom face
+            geometry.faces.push(new THREE.Face3(0, 1, 2));
+            geometry.faces.push(new THREE.Face3(0, 2, 3));
+
+            //top face
+            geometry.faces.push(new THREE.Face3(5, 4, 7));
+            geometry.faces.push(new THREE.Face3(5, 7, 6));
+
+            //left face
+            geometry.faces.push(new THREE.Face3(0, 3, 7));
+            geometry.faces.push(new THREE.Face3(0, 7, 4));
+
+            //right face
+            geometry.faces.push(new THREE.Face3(2, 1, 5));
+            geometry.faces.push(new THREE.Face3(2, 5, 6));
+
+
+            //back face
+            geometry.faces.push(new THREE.Face3(1, 0, 4));
+            geometry.faces.push(new THREE.Face3(1, 4, 5));
+
+            //front face
+            geometry.faces.push(new THREE.Face3(3, 2, 6));
+            geometry.faces.push(new THREE.Face3(3, 6, 7));
+
+            var material = new THREE.MeshBasicMaterial({
+                color: 0x8080FF
+            });
+
+            var mesh = new THREE.Mesh(geometry, material);
+
+            scene.add(mesh);
+
+        }
+
+        function render() {
+            renderer.render(scene, camera);
+        }
+    </script>
+</head>
+<body onload="initRendering()">
+<div id="container"></div>
+</body>
+</html>
