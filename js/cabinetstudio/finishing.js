@@ -1,5 +1,5 @@
 window.cabinetstudio = window.cabinetstudio || {};
-window.cabinetstudio.Finishing = function () {
+window.cabinetstudio.Finishing = function (thickness) {
     "use strict";
-    this.thickNess = 0;
+    this.thickness = thickness;
 };

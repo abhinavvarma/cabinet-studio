@@ -31,7 +31,7 @@ window.cabinetstudio.utils.matrix = {
         var rightCols = rightMatrix[0].length;
 
         if (leftCols !== rightRows) {
-            console.log("Matrix Multipication not possible");
+            throw new window.cabinetstudio.exceptions.MatrixMultiplicationNotPossibleException("Matrix multiplication not possible as columns of first matrix not equal to rows of second matrix");
         }
 
         var matrix = this.getZeroMatrix(leftRows, rightCols);

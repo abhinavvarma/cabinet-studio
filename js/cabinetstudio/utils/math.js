@@ -1,5 +1,4 @@
 window.cabinetstudio = window.cabinetstudio || {};
-
 window.cabinetstudio.utils = window.cabinetstudio.utils || {};
 
 window.cabinetstudio.utils.math = {

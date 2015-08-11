@@ -20,4 +20,10 @@ window.cabinetstudio.constants = window.cabinetstudio.constants || {};
         RIGHT_BOTTOM : 'rightBottom'
     };
 
+    constants.FINISHINGS = {
+        LAMINATION : "lamination",
+        EDGE_BINDING: "edgeBinding",
+        NO_FINISHING : "noFinishing"
+    };
+
 }(window.cabinetstudio.constants));
